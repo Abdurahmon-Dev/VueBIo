@@ -16,24 +16,6 @@ export default {
     Header,
     Main
   },
- 
-  data() {
-    return {
-      data: {}
-    }
-  },
-  beforeMount(){
-    this.getItems();
-  },
-  methods: {
-    async getItems(){
-      const res = await fetch('http://192.144.37.95:8081/api/articles?langId=1');
-      const data = await res.json();
-      this.data = data;
-      console.log(data)
-    }
-  }
-
 }
 </script>
 

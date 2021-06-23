@@ -1,39 +1,60 @@
 <template>
   <div>
       <nav class="animation-card">
-        <img src="@/assets/banana.jpeg" alt="">
-        <button>Iqtisodiyot</button>
+        <img :src="BaseURL.imageUrl + data[7].image" alt="">
+        <button>{{ data[6].category.name }}</button>
         <h4>{{ data[6].title }}</h4>
       </nav>
   </div>
 </template>
 
 <script>
+
 export default {
     name: 'AnimationCard',
 
     data() {
     return {
+      
       BaseURL: {
-          imageUrl: 'http://192.144.37.95/images/'
+          imageUrl: 'http://192.144.37.95/images/',
+          apiUrl: 'http://192.144.37.95:8080/api/'
+      },
+      
+      obj: {
+          langId: 1
       },
       data: {}
     }
   },
   beforeMount(){
-    this.getItems();
+    let object = this.obj;
+    this.getItems(object,'s');
   },
   methods: {
-    async getItems(){
-      const res = await fetch('http://192.144.37.95:8080/api/articles?langId=1');
-      const data = await res.json();
-      this.data = data;
-      console.log(data);
-      console.log(data[6])
-      
-    }
+    
+    async getItems(object,s){
+      let url = `${this.BaseURL.apiUrl}article${s}?`;
+      for (const key in object) {
+          if (Object.hasOwnProperty.call(object, key)) {
+              const element = object[key];
+              url+= `&${key}=${element}`;
+              
+          }
+      }
+      try {
+          const res = await fetch(url);
+          const data = await res.json();
+          console.log(data)
+         
+      } catch (e) {
+          console.log(e);
+      }
+    },
+   
   }
 }
+
 </script>
 
 <style>
@@ -42,6 +63,8 @@ export default {
         height: 412px;
         margin-top: 60px;
         position: relative;
+        margin-bottom: 40px;
+        background-color: aqua;
     }
     .animation-card img {
         width: 100%;
@@ -59,6 +82,8 @@ export default {
         right: 40px;
         cursor: pointer;
         font-size: 16px;
+        padding: 10px;
+        opacity: 0.7;
     }
     .animation-card h4 {
         color: white;
@@ -68,5 +93,11 @@ export default {
         bottom: 40px;
         left: 40px;
         width: 750px;
+    }
+    h4 {
+    -webkit-text-stroke: 2px black; /* width and color */
+    font-family: 'Dela Gothic One',cursive; 
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     }
 </style>
