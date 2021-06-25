@@ -1,9 +1,9 @@
 <template>
   <div>
       <nav class="animation-card">
-        <img :src="BaseURL.imageUrl + data[7].image" alt="">
-        <button>{{ data[6].category.name }}</button>
-        <h4>{{ data[6].title }}</h4>
+        <img :src="BaseURL.imageUrl + random(data).image" alt="">
+        <a href=""><button>{{ random(data).category.name }}</button></a>
+        <h4>{{ random(data).title }}</h4>
       </nav>
   </div>
 </template>
@@ -20,7 +20,9 @@ export default {
           imageUrl: 'http://192.144.37.95/images/',
           apiUrl: 'http://192.144.37.95:8080/api/'
       },
-      
+      BaseItems: {
+        // title: this.data[getValue(index)].title
+      },
       obj: {
           langId: 1
       },
@@ -32,7 +34,13 @@ export default {
     this.getItems(object,'s');
   },
   methods: {
-    
+    random(array){
+        const randomIndex = Math.floor(Math.random() * array.length);
+        const item = array[randomIndex];
+        console.log(item.length)
+        
+        return item;
+    },
     async getItems(object,s){
       let url = `${this.BaseURL.apiUrl}article${s}?`;
       for (const key in object) {
@@ -45,8 +53,7 @@ export default {
       try {
           const res = await fetch(url);
           const data = await res.json();
-          console.log(data)
-         
+          this.data = data;  
       } catch (e) {
           console.log(e);
       }
@@ -64,7 +71,7 @@ export default {
         margin-top: 60px;
         position: relative;
         margin-bottom: 40px;
-        background-color: aqua;
+     
     }
     .animation-card img {
         width: 100%;

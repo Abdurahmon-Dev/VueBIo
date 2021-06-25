@@ -2,17 +2,23 @@
   <div>
       <nav class="cont">
           <div>
-              <img :src="BaseURL.imageUrl + data[8].image" alt="">
-              <button>Iqtisodiyot</button>
+              <a href="">
+                  <img :src="BaseURL.imageUrl + random(data).image" alt="">
+              </a>
+              <a href="https://google.com">
+                  <button>{{ random(data).category.name }}</button>
+              </a>
+              
           </div>
           
           <div class="title-card">
-              <h5 class="line-clamp">O‘zbekistonda 2 ming va 20 ming so‘mlik kupyuralar muomalaga chiqarildi</h5>
+              <h5 class="line-clamp">{{ random(data).title }}</h5>
               <div class="date-icons">
-                  <i class="ri-calendar-2-line"></i><span>06.09.2020</span>
+                  <i class="ri-calendar-2-line"></i><span>{{fixDate(random(data).date)}}</span>
                   <i class="ri-eye-fill"></i><p>15,300</p>
               </div>
           </div>
+          
       </nav>
   </div>
 </template>
@@ -30,32 +36,43 @@ export default {
 
       },
       obj: {
-          langId: 1
+          langId: 1,
+          size: 100,
+          offset: 0
       },
       data: {}
     }
   },
-  mounted(){
+  beforeMount(){
     let object = this.obj;
     this.getItems(object,'s');
   },
   methods: {
-    
+    fixDate(date){
+        const d = new Date(date)
+        let dateStr = ("00" + d.getDate()).slice(-2) + "." + ("00" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear()
+        return dateStr;
+    },
+    random(array){
+        const randomIndex = Math.floor(Math.random() * array.length);
+        const item = array[randomIndex];
+        console.log(item.id);
+        console.log('Hello')
+        return item;
+    },
     async getItems(object,s){
       let url = `${this.BaseURL.apiUrl}article${s}?`;
       for (const key in object) {
           if (Object.hasOwnProperty.call(object, key)) {
               const element = object[key];
               url+= `&${key}=${element}`;
-              console.log(url);
-              console.log('Hello')
           }
       }
       try {
           const res = await fetch(url);
           const data = await res.json();
           this.data = data;
-          console.log(data);
+       
           
       } catch (e) {
           console.log(e);

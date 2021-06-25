@@ -1,20 +1,23 @@
 
 <template>
-<div style="background-color: #E5E5E5; height:100%;">
+<div style="height:100%;">
   <section ><Header/></section>
   <section style="background-color: #E5E5E5; padding:40px 95px 200px 200px;"><Main/></section>
+  <section><Footer/></section>
 </div>
 </template>
 
 <script>
 import Header from "@/header.vue";
 import Main from "@/main.vue";
+import Footer from "@/footer.vue" 
 
 export default {
   
   components: {
     Header,
-    Main
+    Main,
+    Footer
   },
 }
 </script>
