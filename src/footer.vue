@@ -33,27 +33,27 @@
            <div class="reset-list">
                   <div class="social-item">
                       <a href="#" target="_blank">
-                        <img   src="@/assets/telegram.jpg">
+                        <img   src="@/assets/icon1.jpeg">
                       </a> 
                   </div>
                   <div class="social-item">
                       <a href="#" target="_blank">
-                        <img   src="@/assets/instagram.jpg">
+                        <img   src="@/assets/icon4.jpeg">
                       </a>
                   </div>
                   <div class="social-item">
                       <a href="#" target="_blank">
-                     <img  src="@/assets/fecbook.png">
+                     <img  src="@/assets/icon5.jpeg">
                   </a>
                   </div>
               </div>
            </div>
               <div class="store-btns">
                   <a href="#" target="">
-                    <img class="app" src="@/assets/app.png">
+                    <img class="app" src="@/assets/icon3.jpeg">
                   </a>
                   <a href="#" target="">
-                    <img class="play_market" src="@/assets/i.jpg">
+                    <img class="play_market" src="@/assets/icon6.jpeg">
                   </a>
                   </div>
       </footer>
