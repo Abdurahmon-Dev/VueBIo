@@ -24,7 +24,6 @@
      
   </header>
 </template>
-
 <script>
 export default {
     name: 'Header'
@@ -76,13 +75,13 @@ export default {
         margin-left: 92px;
         margin-right: 27px;
         font-size: 16px;
-        transition: 0.2s ease;
+        transition: 0.5s ease;
     }
     .last-section select:hover{
         color: orange;
-        border: orange 1px solid;
+       
         cursor: pointer;
-        border-radius: 8%;
+      
     }
     .ri-phone-line{
         color: orangered;

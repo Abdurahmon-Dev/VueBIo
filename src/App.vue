@@ -1,9 +1,11 @@
 
 <template>
-<div style="height:100%;">
+<div>
+  <div style="height:100%; max-width:1390px; margin:0 auto">
   <section ><Header/></section>
   <section style="background-color: #E5E5E5; padding:40px 95px 200px 200px;"><Main/></section>
   <section><Footer/></section>
+</div>
 </div>
 </template>
 

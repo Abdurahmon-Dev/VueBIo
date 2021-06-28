@@ -1,65 +1,42 @@
 <template>
   <div>
       <nav class="animation-card">
-        <img :src="BaseURL.imageUrl + random(data).image" alt="">
-        <a href=""><button>{{ random(data).category.name }}</button></a>
-        <h4>{{ random(data).title }}</h4>
+        <a href=""><img :src="BaseURL.imageUrl + image" alt=""></a>
+        <button>{{name}}</button>
+        <h4>{{title}}</h4>
       </nav>
-  </div>
+</div>
 </template>
 
 <script>
+// import { Swiper, SwiperSlide } from 'swiper/vue';
+
+
 
 export default {
     name: 'AnimationCard',
+    props: ['title','image','name'],
 
+    // components: {
+    //   Swiper,
+    //   SwiperSlide,
+    // },
     data() {
     return {
-      
       BaseURL: {
           imageUrl: 'http://192.144.37.95/images/',
-          apiUrl: 'http://192.144.37.95:8080/api/'
       },
-      BaseItems: {
-        // title: this.data[getValue(index)].title
-      },
-      obj: {
-          langId: 1
-      },
-      data: {}
     }
   },
-  beforeMount(){
-    let object = this.obj;
-    this.getItems(object,'s');
-  },
-  methods: {
-    random(array){
-        const randomIndex = Math.floor(Math.random() * array.length);
-        const item = array[randomIndex];
-        console.log(item.length)
-        
-        return item;
-    },
-    async getItems(object,s){
-      let url = `${this.BaseURL.apiUrl}article${s}?`;
-      for (const key in object) {
-          if (Object.hasOwnProperty.call(object, key)) {
-              const element = object[key];
-              url+= `&${key}=${element}`;
-              
-          }
-      }
-      try {
-          const res = await fetch(url);
-          const data = await res.json();
-          this.data = data;  
-      } catch (e) {
-          console.log(e);
-      }
-    },
-   
-  }
+
+  // methods: {
+  //     onSwiper(swiper) {
+  //       console.log(swiper);
+  //     },
+  //     onSlideChange() {
+  //       console.log('slide change');
+  //     },
+  //   },
 }
 
 </script>

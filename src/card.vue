@@ -3,18 +3,18 @@
       <nav class="cont">
           <div>
               <a href="">
-                  <img :src="BaseURL.imageUrl + random(data).image" alt="">
+                  <img :src="BASE_URL.IMAGE_URL + image" alt="">
               </a>
               <a href="https://google.com">
-                  <button>{{ random(data).category.name }}</button>
+                  <button>{{name}}</button>
               </a>
               
           </div>
           
           <div class="title-card">
-              <h5 class="line-clamp">{{ random(data).title }}</h5>
+              <h5 class="line-clamp">{{ title }}</h5>
               <div class="date-icons">
-                  <i class="ri-calendar-2-line"></i><span>{{fixDate(random(data).date)}}</span>
+                  <i class="ri-calendar-2-line"></i><span>{{fixDate(date)}}</span>
                   <i class="ri-eye-fill"></i><p>15,300</p>
               </div>
           </div>
@@ -25,59 +25,29 @@
 
 <script>
 export default {
-    name: 'ArticleCard',
-    data() {
-    return {
-      BaseURL: {
-          imageUrl: 'http://192.144.37.95/images/',
-          apiUrl: 'http://192.144.37.95:8080/api/'
-      },
-      BaseItems: {
-
-      },
-      obj: {
-          langId: 1,
-          size: 100,
-          offset: 0
-      },
-      data: {}
-    }
-  },
-  beforeMount(){
-    let object = this.obj;
-    this.getItems(object,'s');
-  },
+   
+    props: ['title','image','date','name'],
+    data(){
+        return {
+            BASE_URL: {
+                IMAGE_URL: 'http://192.144.37.95/images/'
+            }
+        }
+    },
   methods: {
     fixDate(date){
-        const d = new Date(date)
-        let dateStr = ("00" + d.getDate()).slice(-2) + "." + ("00" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear()
+        const time = new Date(date)
+        let dateStr = ("00" + time.getDate()).slice(-2) + "." + ("00" + (time.getMonth() + 1)).slice(-2) + "." + time.getFullYear()
         return dateStr;
     },
-    random(array){
-        const randomIndex = Math.floor(Math.random() * array.length);
-        const item = array[randomIndex];
-        console.log(item.id);
-        console.log('Hello')
-        return item;
-    },
-    async getItems(object,s){
-      let url = `${this.BaseURL.apiUrl}article${s}?`;
-      for (const key in object) {
-          if (Object.hasOwnProperty.call(object, key)) {
-              const element = object[key];
-              url+= `&${key}=${element}`;
-          }
-      }
-      try {
-          const res = await fetch(url);
-          const data = await res.json();
-          this.data = data;
-       
-          
-      } catch (e) {
-          console.log(e);
-      }
-    },
+    // random(array){
+    //     const randomIndex = Math.floor(Math.random() * array.length);
+    //     const item = array[randomIndex];
+    //     console.log(item);
+    //     console.log(array[item])
+    //     return item;
+    // },
+    
     // loop(){
     //     for (let index = 0; index < 3; index++) {
     //         const element = data[index];
