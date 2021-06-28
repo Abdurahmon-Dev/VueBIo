@@ -15,7 +15,28 @@
 
 export default {
     name: 'AnimationCard',
-    props: ['title','image','name'],
+    props: {
+      title: {
+        type: String,
+        required: true,
+        default: 'None title'
+      },
+      image: {
+        type: String,
+        required: false,
+        default: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.merriam-webster.com%2Fvideo%2Fis-none-singular-or-plural&psig=AOvVaw0oQr5t4sAJyHmSwVDP4EA9&ust=1624971409940000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCNCor6-wuvECFQAAAAAdAAAAABAD'
+      },
+      name: {
+        type: String,
+        required: false,
+        default: 'None category'
+      },
+      date: {
+        type: String,
+        required: true,
+        default: 'None time!'
+      }
+    },
 
     // components: {
     //   Swiper,

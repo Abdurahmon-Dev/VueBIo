@@ -26,7 +26,28 @@
 <script>
 export default {
    
-    props: ['title','image','date','name'],
+    props: {
+        title: {
+        type: String,
+        required: true,
+        default: 'None title'
+      },
+      image: {
+        type: String,
+        required: false,
+        default: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.merriam-webster.com%2Fvideo%2Fis-none-singular-or-plural&psig=AOvVaw0oQr5t4sAJyHmSwVDP4EA9&ust=1624971409940000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCNCor6-wuvECFQAAAAAdAAAAABAD'
+      },
+      name: {
+        type: String,
+        required: false,
+        default: 'None category'
+      },
+      date: {
+        type: String,
+        required: true,
+        default: 'None time!'
+      }
+    },
     data(){
         return {
             BASE_URL: {
@@ -40,21 +61,6 @@ export default {
         let dateStr = ("00" + time.getDate()).slice(-2) + "." + ("00" + (time.getMonth() + 1)).slice(-2) + "." + time.getFullYear()
         return dateStr;
     },
-    // random(array){
-    //     const randomIndex = Math.floor(Math.random() * array.length);
-    //     const item = array[randomIndex];
-    //     console.log(item);
-    //     console.log(array[item])
-    //     return item;
-    // },
-    
-    // loop(){
-    //     for (let index = 0; index < 3; index++) {
-    //         const element = data[index];
-            
-    //     }
-    // }
-   
   }
 }
 </script>
