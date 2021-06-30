@@ -1,7 +1,7 @@
 <template>
   <div>
     <section>
-      <AnimationCard v-for="index in 1 " :key="index" 
+      <AnimationCard v-for="index in 1" :key="index" 
       :title="data[index].title"
       :image="data[index].image"
       :name="data[index].category.name"
@@ -10,11 +10,11 @@
       </AnimationCard>
     </section>
     <section class="article-card-section">
-      <ArticleCard v-for="item in indexCards" :key="item"
-      :title="data[item].title"
-      :image="data[item].image"
-      :name="data[item].category.name"
-      :date="data[item].date"
+      <ArticleCard v-for="item of indexCards" :key="item"
+        :title="data[item].title"
+        :image="data[item].image"
+        :name="data[item].category.name"
+        :date="data[item].date"
       ></ArticleCard>
     </section>
     <div>
@@ -38,41 +38,39 @@ export default {
           apiUrl: 'http://192.144.37.95:8080/api/'
       },
 
-      data:{},
-      obj: {
-          langId:1,
-          offset:0,
-          size:100
-      },
+      data:[],
+      
+
+      BASE_OFFSET: 0,
+      BASE_SIZE: 7,
       indexCards: 6
       
     };
   },
   beforeMount(){
-    let object = this.obj;
-    this.getItems(object,'s');
+    this.getItems('s');
   },
   methods: {
     moreInfo(){
-        this.indexCards = this.indexCards + 3
-    },
+        this.indexCards += 3;
+        this.BASE_SIZE += 3;
+        this.getItems('s');
+        
+    },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     random(array){
         const randomIndex = Math.floor(Math.random() * array.length);
         const item = array[randomIndex];
         return item;
     },
-    async getItems(object, s) {
-      let url = `${this.BaseURL.apiUrl}article${s}?`;
-      for (const key in object) {
-        if (Object.hasOwnProperty.call(object, key)) {
-          const element = object[key];
-          url += `&${key}=${element}`;
-        }
-      }
+    async getItems(s) {
+      let url = `${this.BaseURL.apiUrl}article${s}?langId=1&size=${this.BASE_SIZE}&offset=${this.BASE_OFFSET}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             `;
       try {
         const res = await fetch(url);
         const data = await res.json();
         this.data = data;
+        console.log(data)
+
+        console.log(this.data)
       } catch (e) {
         console.log(e);
       }

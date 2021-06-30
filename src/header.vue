@@ -10,7 +10,7 @@
           <li><a href="" class="category">Muhim</a></li>
       </ul>
       
-      <section class="last-section">
+      <section class="last-section" @change="hello">
         <select name="" id="" class="languages">
             <option value="uz">O`zbekcha</option>
             <option value="ru">Русский</option>
@@ -26,7 +26,12 @@
 </template>
 <script>
 export default {
-    name: 'Header'
+    name: 'Header',
+    methods: {
+        hello(){
+            alert('hello')
+        }
+    }
 }
 </script>
 
