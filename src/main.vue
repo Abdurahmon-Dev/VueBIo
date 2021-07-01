@@ -2,10 +2,10 @@
   <div>
     <section>
       <AnimationCard v-for="index in 1" :key="index" 
-      :title="data[index].title"
-      :image="data[index].image"
-      :name="data[index].category.name"
-      :date="data[index].date"
+      :title="data[index + $AddImage].title"
+      :image="data[index + $AddImage].image"
+      :name="data[index + $AddImage].category.name"
+      :date="data[index + $AddImage].date"
       >
       </AnimationCard>
     </section>
@@ -17,7 +17,7 @@
         :date="data[item].date"
       ></ArticleCard>
     </section>
-    <div>
+    <div class="more-cont">
       <button @click="moreInfo" class="more-info">Ko’proq yangilik yuklash</button>
     </div>
   </div>
@@ -25,6 +25,7 @@
 <script>
 import AnimationCard from "@/animation_card.vue";
 import ArticleCard from "@/card.vue";
+
 
 export default {
   name: "Main",
@@ -50,12 +51,25 @@ export default {
   beforeMount(){
     this.getItems('s');
   },
+  mounted() {
+    console.log(this.$AddImage)
+    let time = setInterval(this.animation,3000)
+    if (this.BASE_SIZE > 100) {
+      clearInterval(time);
+    }
+  },
   methods: {
+    animation(){
+      this.BASE_SIZE += 3;
+      this.$AddImage = this.$AddImage + 1;
+      console.log(this.$AddImage)
+      this.getItems('s')
+      this.BASE_SIZE += 3;
+    },
     moreInfo(){
         this.indexCards += 3;
         this.BASE_SIZE += 3;
         this.getItems('s');
-        
     },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     random(array){
         const randomIndex = Math.floor(Math.random() * array.length);
@@ -80,21 +94,5 @@ export default {
 </script>
 
 <style>
-.article-card-section {
-  display: flex;
-  gap: 11px;
-  flex-wrap: wrap;
-}
-.more-info {
-  padding: 15px;
-  background-color: black;
-  color: white;
-  position: relative;
-  bottom: 0;
-  font-size: 16px;
-  font-weight: 600;
-  border: none;
-  margin: 50px 0px 0px 365px;
-  cursor: pointer;
-}
+ @import url(./styles/home_main.css);
 </style>

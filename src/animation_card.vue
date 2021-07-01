@@ -1,14 +1,28 @@
 <template>
-  <div>
-    <nav class="animation-card">
-      <a href=""><img :src="BaseUrl.imageUrl + image" alt=""/></a>
-      <button>{{ name }}</button>
-      <h4>{{ title }}</h4>
-    </nav>
+  <div >
+    <div class="swiper-container "> 
+      <div class="swiper-wrapper">
+        <nav class="animation-card swiper-slide">
+          <a href=""><img :src="BaseUrl.imageUrl + image" alt=""/></a>
+          <button>{{ name }}</button>
+          <h4>{{ title }}</h4>
+      </nav>
+      
+      </div>
+      <div @click="next" class="nextIcon">
+        <i class="ri-arrow-right-fill"></i>
+      </div>
+      <div @click="prev" class="prevIcon">
+        <i class="ri-arrow-left-fill"></i>
+      </div>
+  </div>
   </div>
 </template>
 
 <script>
+// import {getItems} from './main.vue'
+import Swiper from 'swiper';
+import 'swiper/swiper-bundle.css';
 export default {
   name: "AnimationCard",
   props: {
@@ -34,51 +48,81 @@ export default {
       BaseUrl: {
         imageUrl: "http://192.144.37.95/images/",
       },
+      swiper: ''
     };
   },
+  methods: {
+    next() {
+      this.swiper.slideNext();
+      this.$AddImage += 1;
+      console.log(this.$AddImage);
+      // getItems('s')
+    },
+    prev() {
+      this.swiper.slidePrev();
+      this.$AddImage -= 1;
+      console.log(this.$AddImage);
+      // getItems('s')
+      
+    }
+  },
+  mounted() {
+    this.swiper = new Swiper('.swiper-container', {
+      // Optional parameters
+      direction: 'horizontal',
+      loop: true,
+
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+      // And if we need scrollbar
+      scrollbar: {
+        el: '.swiper-scrollbar',
+      },
+    });
+  }
 };
 </script>
 
 <style>
-.animation-card {
-  width: 949px;
-  height: 412px;
-  margin-top: 60px;
-  position: relative;
-  margin-bottom: 40px;
-}
-.animation-card img {
-  width: 100%;
-  height: 100%;
-}
-.animation-card button {
-  outline: none;
-  border: none;
-  color: white;
-  width: 147px;
-  height: 54px;
-  background-color: black;
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  cursor: pointer;
-  font-size: 16px;
-  padding: 10px;
-  opacity: 0.7;
-}
-.animation-card h4 {
-  color: white;
-  font-size: 24px;
-  font-weight: 700;
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
-  width: 750px;
-}
-h4 {
-  -webkit-text-stroke: 2px black; /* width and color */
-  font-family: "Dela Gothic One", cursive;
-  font-family: "Roboto", sans-serif;
-  font-family: "Source Sans Pro", sans-serif;
-}
+  @import url(./styles/animation_card.css);
+  .swiper-container {
+        width: 90%;
+        margin: 0 !important;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+      
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+     
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+    
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        
+     
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 412px;
+        /* object-fit: cover; */
+ 
+      }
 </style>
