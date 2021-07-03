@@ -1,11 +1,12 @@
 <template>
   <div>
     <section>
-      <AnimationCard v-for="index in 1" :key="index" 
-      :title="data[index + $AddImage].title"
-      :image="data[index + $AddImage].image"
-      :name="data[index + $AddImage].category.name"
-      :date="data[index + $AddImage].date"
+      <AnimationCard
+      :title="data[1].title"
+      :date="data[1].date"
+      :image="data[1].image"
+      :name="data[1].category.name"
+      :info="concat(data)"
       >
       </AnimationCard>
     </section>
@@ -29,6 +30,7 @@ import ArticleCard from "@/card.vue";
 
 export default {
   name: "Main",
+ 
   components: {
     AnimationCard,
     ArticleCard,
@@ -44,7 +46,7 @@ export default {
 
       BASE_OFFSET: 0,
       BASE_SIZE: 7,
-      indexCards: 6
+      indexCards: 3
       
     };
   },
@@ -52,13 +54,18 @@ export default {
     this.getItems('s');
   },
   mounted() {
-    console.log(this.$AddImage)
-    let time = setInterval(this.animation,3000)
-    if (this.BASE_SIZE > 100) {
-      clearInterval(time);
-    }
+   
+    // console.log(this.$AddImage)
+    // let time = setInterval(this.animation,4000)
+    // if (this.BASE_SIZE > 100) {
+    //   clearInterval(time);
+    // }
   },
   methods: {
+    concat(item) {
+      const array = this.data.concat(item)
+      console.log(array)
+    },
     animation(){
       this.BASE_SIZE += 3;
       this.$AddImage = this.$AddImage + 1;
@@ -67,8 +74,9 @@ export default {
       this.BASE_SIZE += 3;
     },
     moreInfo(){
+        this.BASE_SIZE += 3
         this.indexCards += 3;
-        this.BASE_SIZE += 3;
+        this.BASE_OFFSET += 3;
         this.getItems('s');
     },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     random(array){
@@ -82,9 +90,9 @@ export default {
         const res = await fetch(url);
         const data = await res.json();
         this.data = data;
-        console.log(data)
+        // console.log(data)
 
-        console.log(this.data)
+        // console.log(this.data)
       } catch (e) {
         console.log(e);
       }
