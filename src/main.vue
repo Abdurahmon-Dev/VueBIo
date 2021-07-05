@@ -46,33 +46,20 @@ export default {
 
       BASE_OFFSET: 0,
       BASE_SIZE: 7,
-      indexCards: 3
+      indexCards: 6
       
     };
   },
   beforeMount(){
     this.getItems('s');
   },
-  mounted() {
-   
-    // console.log(this.$AddImage)
-    // let time = setInterval(this.animation,4000)
-    // if (this.BASE_SIZE > 100) {
-    //   clearInterval(time);
-    // }
-  },
+ 
   methods: {
     concat(item) {
-      const array = this.data.concat(item)
-      console.log(array)
+      const array = this.data.concat(item);
+      console.log(array);
     },
-    animation(){
-      this.BASE_SIZE += 3;
-      this.$AddImage = this.$AddImage + 1;
-      console.log(this.$AddImage)
-      this.getItems('s')
-      this.BASE_SIZE += 3;
-    },
+    
     moreInfo(){
         this.BASE_SIZE += 3
         this.indexCards += 3;
@@ -85,7 +72,7 @@ export default {
         return item;
     },
     async getItems(s) {
-      let url = `${this.BaseURL.apiUrl}article${s}?langId=1&size=${this.BASE_SIZE}&offset=${this.BASE_OFFSET}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             `;
+      let url = `${this.$BASE_API}article${s}?langId=1&size=${this.BASE_SIZE}&offset=${this.BASE_OFFSET}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             `;
       try {
         const res = await fetch(url);
         const data = await res.json();
