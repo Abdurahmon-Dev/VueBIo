@@ -24,8 +24,8 @@
   </div>
 </template>
 <script>
-import AnimationCard from "@/animation_card.vue";
-import ArticleCard from "@/card.vue";
+import AnimationCard from "@/components/Main/SwiperCard/index.vue";
+import ArticleCard from "@/components/Main/ArticleCard/index.vue";
 
 
 export default {
@@ -89,5 +89,26 @@ export default {
 </script>
 
 <style>
- @import url(./styles/home_main.css);
+ .article-card-section {
+    display: flex;
+    gap: 11px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .more-info {
+    padding: 15px;
+    background-color: black;
+    color: white;
+    position: relative;
+    bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    margin-top: 3em;
+    cursor: pointer;
+  }
+  .more-cont {
+    display: flex;
+    justify-content: center;
+  }
 </style>

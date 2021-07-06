@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style>
-    @import url(./styles/header.css);
+    @import url(./header.css);
     
 
 </style>

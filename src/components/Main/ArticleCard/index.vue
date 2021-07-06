@@ -55,9 +55,7 @@ export default {
         }
     },
   methods: {
-    throw_emmit() {
-      this.$emit(this.data)
-    },
+    
     fixDate(date){
         const time = new Date(date)
         let dateStr = ("00" + time.getDate()).slice(-2) + "." + ("00" + (time.getMonth() + 1)).slice(-2) + "." + time.getFullYear()
@@ -68,6 +66,6 @@ export default {
 </script>
 
 <style>
-    @import url(./styles/card.css);
+    @import url(./ArticleCard.css);
 
 </style>
